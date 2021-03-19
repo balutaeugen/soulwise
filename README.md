@@ -1,4 +1,4 @@
-# Soulise App
+# Soulwise App
 
 This is a representation of the Soulwise App, inspired and reproduced from the next url
 
