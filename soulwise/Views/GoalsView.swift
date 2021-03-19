@@ -11,15 +11,20 @@ struct GoalsView: View {
     @Binding var showSheetView: Bool
     
     private var goalsInfo: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        Group {
             Text("What brings you to\nmediation?")
                 .foregroundColor(.init(hex: "#3E4953"))
                 .font(.system(size: 30, weight: .semibold))
                 .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Spacer()
+                .frame(height: 15)
             Text("Pick your top goal")
                 .foregroundColor(.init(hex: "#CDCDCD"))
                 .font(.system(size: 15, weight: .semibold))
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .padding(.init(top: 0, leading: 30, bottom: 0, trailing: 30))
     }
     
     private var goalsGrid: some View {
@@ -52,16 +57,15 @@ struct GoalsView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                VStack(alignment: .leading) {
-//                    Spacer()
-//                        .frame(minHeight: 20, idealHeight: 70, maxHeight: .infinity)
+                VStack(alignment: .center) {
+                    Spacer()
+                        .frame(height: 45.resizeHeight)
                     goalsInfo
-//                    Spacer()
-//                        .frame(minHeight: 20, idealHeight: 70, maxHeight: .infinity)
+                    Spacer()
+                        .frame(height: 45.resizeHeight)
                     goalsGrid
                     Spacer()
-                        .frame(minHeight: 20, idealHeight: 142, maxHeight: .infinity)
-                        //.frame(height: 142)
+                        .frame(height: 142.resizeHeight)
                     nextButton
                     Spacer()
                         .frame(height: 27)

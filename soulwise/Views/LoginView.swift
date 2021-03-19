@@ -77,7 +77,14 @@ struct LoginView: View {
                 }
             }
         }
+        .navigationBarTitle("", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+    }
+    
+    init() {
+        UINavigationBar.appearance().barTintColor = .clear
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
     }
 }
 

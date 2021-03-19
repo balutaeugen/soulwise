@@ -10,7 +10,7 @@ import SwiftUI
 struct CredentialsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isPresentingGoals = false
-    @State private var text: String = ""
+    @State private var text: String = "Ramon"
     
     private var backButton: some View {
         Button(action: {
@@ -21,45 +21,28 @@ struct CredentialsView: View {
     }
     
     private var credentialsInfo: some View {
-        VStack(alignment: .leading, spacing: 15) {
+        Group {
             Text("Lets get started!")
                 .foregroundColor(.init(hex: "#3E4953"))
                 .font(.system(size: 30, weight: .semibold))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Spacer()
+                .frame(height: 15)
             Text("Create an account to better\nmanage people in your team")
                 .foregroundColor(.init(hex: "#CDCDCD"))
                 .font(.system(size: 15, weight: .semibold))
                 .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .fixedSize(horizontal: false, vertical: true)
         }
+        .padding(EdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30))
     }
     
     private var signUpForm: some View {
-        VStack(spacing: 20) {
-            ZStack {
-                Text("Username")
-                TextField("Username", text: $text)
+        VStack(alignment: .leading, spacing: 20) {
+            ForEach(0..<CredentialType.allCases.count) { index in
+                CredentialView(type: CredentialType.allCases[index])
             }
-            .padding(EdgeInsets(top: 13, leading: 16, bottom: 13, trailing: 16))
-            .frame(width: UIScreen.main.bounds.width - (30 * 2), height: 55)
-            .background(Color(hex: "#F6F8F9"))
-            .cornerRadius(10)
-            
-            ZStack {
-                Text("Username")
-                TextField("Username", text: $text)
-            }
-            .padding(EdgeInsets(top: 13, leading: 16, bottom: 13, trailing: 16))
-            .frame(width: UIScreen.main.bounds.width - (30 * 2), height: 55)
-            .background(Color(hex: "#F6F8F9"))
-            .cornerRadius(10)
-            
-            ZStack {
-                Text("Username")
-                TextField("Username", text: $text)
-            }
-            .padding(EdgeInsets(top: 13, leading: 16, bottom: 13, trailing: 16))
-            .frame(width: UIScreen.main.bounds.width - (30 * 2), height: 55)
-            .background(Color(hex: "#F6F8F9"))
-            .cornerRadius(10)
         }
     }
     
@@ -92,7 +75,7 @@ struct CredentialsView: View {
         Button("Sign Up") {
             isPresentingGoals.toggle()
         }
-        .frame(width: UIScreen.main.bounds.width - (30 * 2), height: 50)
+        .frame(width: 315.resizeWidth, height: 50.resizeHeight)
         .background(Color(hex: "#FEA516"))
         .font(.system(size: 15, weight: .semibold))
         .foregroundColor(.black)
@@ -111,7 +94,7 @@ struct CredentialsView: View {
                 Text("Continue with Google")
             }
         }
-        .frame(width: UIScreen.main.bounds.width - (30 * 2), height: 50)
+        .frame(width: 315.resizeWidth, height: 50.resizeHeight)
         
         .font(.system(size: 15, weight: .semibold))
         .foregroundColor(.black)
@@ -125,18 +108,17 @@ struct CredentialsView: View {
     
     var body: some View {
         ZStack {
-            VStack(alignment: .leading) {
-                Spacer()
+            VStack(alignment: .center) {
                 credentialsInfo
+                Spacer()
+                    .frame(height: 52.resizeHeight)
                 VStack {
-                    Spacer()
-                        .frame(minHeight: 20, idealHeight: 52, maxHeight: .infinity)
                     signUpForm
                     Spacer()
-                        .frame(minHeight: 20, idealHeight: 66, maxHeight: .infinity)
+                        .frame(height: 66.resizeHeight)
                     linksInfo
                     Spacer()
-                        .frame(height: 20)
+                        .frame(height: 20.resizeHeight)
                     VStack(spacing: 15) {
                         signUpButton
                         Text("or")
@@ -145,12 +127,13 @@ struct CredentialsView: View {
                         googleButton
                     }
                     Spacer()
-                        .frame(height: 27)
+                        .frame(height: 27.resizeHeight)
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: backButton)
+        .navigationBarTitle("", displayMode: .inline)
     }
 }
 

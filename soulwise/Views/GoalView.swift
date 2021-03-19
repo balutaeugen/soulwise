@@ -22,7 +22,8 @@ struct GoalView: View {
             title
                 .foregroundColor(.init(hex: "#75828C"))
                 .font(.system(size: 15, weight: .semibold))
-                .multilineTextAlignment(/*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
         }
         
     }
