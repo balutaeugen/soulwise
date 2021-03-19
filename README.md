@@ -9,6 +9,14 @@ Done for **iOS 13+** devices, with "SwiftUI 1.0"
 
 _Screenshots of the project_
 
-<img src="screens/Simulator Screen Shot - iPhone 12 Pro - 2021-03-19 at 18.27.08.png" width="200">
-<img src="screens/Simulator Screen Shot - iPhone 12 Pro - 2021-03-19 at 18.27.19.png" width="200">
-<img src="screens/Simulator Screen Shot - iPhone 12 Pro - 2021-03-19 at 18.27.22.png" width="200">
+<p float="left">
+    <img src="screens/Simulator Screen Shot - iPhone 12 Pro - 2021-03-19 at 18.27.08.png" width="30%">
+    <img src="screens/Simulator Screen Shot - iPhone 12 Pro - 2021-03-19 at 18.27.19.png" width="30%">
+    <img src="screens/Simulator Screen Shot - iPhone 12 Pro - 2021-03-19 at 18.27.22.png" width="30%">
+</p>
+
+
+
+
+
+
