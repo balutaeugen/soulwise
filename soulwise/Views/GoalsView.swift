@@ -9,24 +9,23 @@ import SwiftUI
 
 struct GoalsView: View {
     @Binding var showSheetView: Bool
-    
+
     private var goalsInfo: some View {
         Group {
             Text("What brings you to\nmediation?")
                 .foregroundColor(.init(hex: "#3E4953"))
                 .font(.system(size: 30, weight: .semibold))
                 .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
                 .frame(height: 15)
             Text("Pick your top goal")
                 .foregroundColor(.init(hex: "#CDCDCD"))
                 .font(.system(size: 15, weight: .semibold))
-                .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(.init(top: 0, leading: 30, bottom: 0, trailing: 30))
+        .padding(.horizontal, 30)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
-    
+
     private var goalsGrid: some View {
         ZStack {
             VStack(spacing: 32) {
@@ -42,10 +41,10 @@ struct GoalsView: View {
             }
         }
     }
-    
+
     private var nextButton: some View {
         Button("Next") {
-            
+
         }
         .frame(width: UIScreen.main.bounds.width - (30 * 2), height: 50)
         .background(Color(hex: "#FEA516"))
@@ -53,7 +52,7 @@ struct GoalsView: View {
         .foregroundColor(.black)
         .cornerRadius(10)
     }
-    
+
     var body: some View {
         NavigationView {
             ZStack {

@@ -11,15 +11,15 @@ struct CredentialsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isPresentingGoals = false
     @State private var text: String = "Ramon"
-    
+
     private var backButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
-        }) {
+        }, label: {
             Image("back.icon")
-        }
+        })
     }
-    
+
     private var credentialsInfo: some View {
         Group {
             Text("Lets get started!")
@@ -35,42 +35,42 @@ struct CredentialsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(EdgeInsets(top: 0, leading: 30, bottom: 0, trailing: 30))
+        .padding(.horizontal, 30)
     }
-    
+
     private var signUpForm: some View {
         VStack(alignment: .leading, spacing: 20) {
-            ForEach(0..<CredentialType.allCases.count) { index in
-                CredentialView(type: CredentialType.allCases[index])
+            ForEach(CredentialType.allCases, id: \.self) { credentialType in
+                CredentialView(type: credentialType)
             }
         }
     }
-    
+
     private var linksInfo: some View {
         VStack(spacing: 0) {
             Text("By continuing you agree to our")
                 .foregroundColor(.init(hex: "#B3BAC3"))
                 .font(.system(size: 15, weight: .semibold))
             HStack(spacing: 5) {
-                Button(action: {}) {
+                Button(action: {}, label: {
                     Text("Terms and Conditions")
                         .foregroundColor(.black)
                         .underline()
                         .font(.system(size: 15, weight: .semibold))
-                }
+                })
                 Text("and")
                     .foregroundColor(.init(hex: "#B3BAC3"))
                     .font(.system(size: 15, weight: .semibold))
-                Button(action: {}) {
+                Button(action: {}, label: {
                     Text("Privacy Policy")
                         .foregroundColor(.black)
                         .underline()
                         .font(.system(size: 15, weight: .semibold))
-                }
+                })
             }
         }
     }
-    
+
     private var signUpButton: some View {
         Button("Sign Up") {
             isPresentingGoals.toggle()
@@ -84,18 +84,18 @@ struct CredentialsView: View {
             GoalsView(showSheetView: $isPresentingGoals)
         }
     }
-    
+
     private var googleButton: some View {
         Button(action: {
             isPresentingGoals.toggle()
-        }) {
+        }, label: {
             HStack(spacing: 13) {
                 Image("google.icon")
                 Text("Continue with Google")
             }
-        }
+        })
         .frame(width: 315.resizeWidth, height: 50.resizeHeight)
-        
+
         .font(.system(size: 15, weight: .semibold))
         .foregroundColor(.black)
         .cornerRadius(10)
@@ -105,7 +105,7 @@ struct CredentialsView: View {
             GoalsView(showSheetView: $isPresentingGoals)
         }
     }
-    
+
     var body: some View {
         ZStack {
             VStack(alignment: .center) {
@@ -137,15 +137,15 @@ struct CredentialsView: View {
     }
 }
 
-struct CredentialsView_Previews: PreviewProvider {
-    static var previews: some View {
-        CredentialsView()
-    }
-}
-
+// struct CredentialsView_Previews: PreviewProvider {
+//     static var previews: some View {
+//         CredentialsView()
+//     }
+// }
 
 extension View {
-    func compatibleFullScreen<Content: View>(isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) -> some View {
+    func compatibleFullScreen<Content: View>(isPresented: Binding<Bool>,
+                                             @ViewBuilder content: @escaping () -> Content) -> some View {
         self.modifier(FullScreenModifier(isPresented: isPresented, builder: content))
     }
 }

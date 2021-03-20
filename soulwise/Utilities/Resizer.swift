@@ -14,7 +14,7 @@ protocol Resizer {}
 extension Resizer {
     var resizeWidth: CGFloat {
         let value = CGFloat(exactly: (self as? NSNumber) ?? NSNumber(0)) ?? 0
-        
+
         if Device.current.realDevice.isPhone {
             switch Device.current.realDevice {
             case .iPhone4, .iPhone4s: return value * 0.853
@@ -29,13 +29,13 @@ extension Resizer {
             default: return value
             }
         }
-        
+
         return CGFloat(exactly: (self as? NSNumber) ?? NSNumber(0)) ?? 0
     }
-    
+
     var resizeHeight: CGFloat {
         let value = CGFloat(exactly: (self as? NSNumber) ?? NSNumber(0)) ?? 0
-        
+
         if Device.current.realDevice.isPhone {
             switch Device.current.realDevice {
             case .iPhone4, .iPhone4s: return value * 0.5911330049
@@ -50,7 +50,7 @@ extension Resizer {
             default: return value
             }
         }
-        
+
         return value
     }
 }

@@ -1,0 +1,59 @@
+# By default, SwiftLint uses a set of sensible default rules you can adjust:
+disabled_rules:
+  - trailing_newline
+  - comment_spacing
+  - identifier_name
+  - type_name
+  - trailing_whitespace
+  - multiple_closures_with_trailing_closure
+  
+opt_in_rules: # some rules are turned off by default, so you need to opt-in
+  - empty_count # Find all the available rules by running: swiftlint rules
+#  - indentation_width
+#  - closure_body_length
+
+included: # paths to include during linting. --path is ignored if present.
+   - soulwise
+#  - Engley
+excluded: # paths to ignore during linting. Takes precedence over included.
+#  - Carthage
+#  - Pods
+
+force_cast: warning # implicitly
+force_try:
+  severity: warning # explicitly
+  
+line_length:
+  - 120
+  - 200
+  
+function_body_length:
+  - 40
+  - 70
+  
+function_parameter_count:
+  - 5
+  - 8
+  
+#indentation_width:
+#  - warning
+
+type_body_length:
+  - 300 # warning
+  - 400 # error
+  
+#closure_body_length:
+#  - 10 # warning
+#  - 50 # error
+
+file_length:
+  warning: 400
+  error: 700
+
+comma: warning
+
+trailing_semicolon: warning
+
+#trailing_whitespace:
+#  - warning
+#  - ignores_comments

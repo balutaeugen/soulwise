@@ -10,9 +10,9 @@ import SwiftUI
 struct GoalView: View {
     var image: Image
     var title: Text
-    
+
     var body: some View {
-        VStack() {
+        VStack {
             ZStack {
                 Circle()
                     .foregroundColor(Color(hex: "#EFF3F5"))
@@ -25,7 +25,7 @@ struct GoalView: View {
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        
+
     }
 }
 

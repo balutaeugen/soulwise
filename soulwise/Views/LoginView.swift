@@ -9,13 +9,13 @@ import SwiftUI
 
 struct LoginView: View {
     @State private var isPushingCredentials = false
-    
+
     private var illustration: some View {
         Image("login.illustration")
             .resizable()
             .aspectRatio(contentMode: .fit)
     }
-    
+
     private var appInfo: some View {
         VStack(spacing: 13) {
             Text("Welcome to Soulwise")
@@ -27,11 +27,11 @@ struct LoginView: View {
                 .multilineTextAlignment(.center)
         }
     }
-    
+
     private var startButton: some View {
         NavigationLink(
             destination: CredentialsView(),
-            isActive: $isPushingCredentials){
+            isActive: $isPushingCredentials) {
             Button("Get Started") {
                 isPushingCredentials = true
             }
@@ -41,26 +41,25 @@ struct LoginView: View {
             .foregroundColor(.black)
             .cornerRadius(10)
         }
-        
     }
-    
+
     private var signInInfo: some View {
         HStack(spacing: 5) {
             Text("Already have an account?")
                 .foregroundColor(.init(hex: "#CDCDCD"))
             Button("Sign in") {
-                
+
             }
             .foregroundColor(.init(hex: "#FEA516"))
         }
         .font(.system(size: 13, weight: .semibold))
     }
-    
+
     var body: some View {
         NavigationView {
             ZStack {
                 Color.white.edgesIgnoringSafeArea(.all)
-                
+
                 VStack {
                     illustration
                     Spacer()
@@ -80,7 +79,7 @@ struct LoginView: View {
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
     }
-    
+
     init() {
         UINavigationBar.appearance().barTintColor = .clear
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
@@ -92,7 +91,7 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
             .previewDevice("iPhone X")
-        
+
         LoginView()
             .previewDevice("iPhone 8")
     }
