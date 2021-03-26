@@ -44,8 +44,8 @@ struct GoalView: View {
     }
     private var image: some View {
         Image(goal.image)
-            .renderingMode(.template)
-            .foregroundColor(.init(hex: isSelected ? "#FFFFFF" : "#000000"))
+//            .renderingMode(.template)
+//            .foregroundColor(.init(hex: isSelected ? "#FFFFFF" : "#000000"))
     }
     private var title: some View {
         Text(goal.title)

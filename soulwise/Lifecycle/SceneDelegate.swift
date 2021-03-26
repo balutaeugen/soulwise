@@ -13,10 +13,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
-        let contentView = LoginView()
+        let loginView = LoginView()
+        let mainView = MainView(showSheetView: Binding<Bool>(get: {return true}, set: {_ in}))
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            if UserDefaults.standard.bool(forKey: "logged") {
+                window.rootViewController = UIHostingController(rootView: mainView)
+            } else {
+                window.rootViewController = UIHostingController(rootView: loginView)
+            }
             self.window = window
             window.makeKeyAndVisible()
         }

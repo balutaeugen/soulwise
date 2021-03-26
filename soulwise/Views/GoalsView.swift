@@ -11,6 +11,7 @@ import Combine
 struct GoalsView: View {
     @Binding var showSheetView: Bool
     @ObservedObject var viewModel = GoalsModel()
+    @State var isPresentingMain = false
     @State var cancellable: AnyCancellable?
     @State var elementsSelected: Bool = false
 
@@ -48,7 +49,7 @@ struct GoalsView: View {
 
     private var nextButton: some View {
         Button(action: {
-            
+            isPresentingMain = true
         }, label: {
             HStack(spacing: 13) {
                 Text("Next")
@@ -62,6 +63,9 @@ struct GoalsView: View {
         .font(.system(size: 15, weight: .semibold))
         .foregroundColor(.black)
         .cornerRadius(10)
+        .compatibleFullScreen(isPresented: $isPresentingMain) {
+            MainView(showSheetView: $isPresentingMain)
+        }
     }
 
     var body: some View {
