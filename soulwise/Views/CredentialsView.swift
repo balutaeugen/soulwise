@@ -41,9 +41,9 @@ struct CredentialsView: View {
     
     private var signUpForm: some View {
         VStack(alignment: .leading, spacing: 20) {
-            CredentialView(type: .username, data: $viewModel.username)
-            CredentialView(type: .email, data: $viewModel.email)
-            CredentialView(type: .password, data: $viewModel.password)
+            CredentialView(type: .username, data: $viewModel.info.username)
+            CredentialView(type: .email, data: $viewModel.info.email)
+            CredentialView(type: .password, data: $viewModel.info.password)
         }
     }
     
@@ -152,11 +152,11 @@ struct CredentialsView: View {
     }
 }
 
-struct CredentialsView_Previews: PreviewProvider {
-    static var previews: some View {
-        CredentialsView()
-    }
-}
+//struct CredentialsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CredentialsView()
+//    }
+//}
 
 extension View {
     func compatibleFullScreen<Content: View>(isPresented: Binding<Bool>,

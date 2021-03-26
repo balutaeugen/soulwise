@@ -8,12 +8,12 @@
 import SwiftUI
 import Combine
 
-enum Goals {
-    case stress
-    case curiosity
-    case communicate
-    case sleeping
-    case anxiety
+enum Goals: String {
+    case stress = "stress"
+    case curiosity = "curiosity"
+    case communicate = "communicate"
+    case sleeping = "sleepy"
+    case anxiety = "anxiety"
     
     var title: String {
         switch self {
@@ -26,13 +26,7 @@ enum Goals {
     }
     
     var image: String {
-        switch self {
-        case .stress: return "stress.icon"
-        case .curiosity: return "curiosity.icon"
-        case .communicate: return "communicate.icon"
-        case .sleeping: return "sleepy.icon"
-        case .anxiety: return "anxiety.icon"
-        }
+        self.rawValue + ".icon"
     }
 }
 

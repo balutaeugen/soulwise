@@ -9,18 +9,22 @@ import Foundation
 import Combine
 
 class CredentialsModel: ObservableObject {
-    @Published var username: String = ""
-    @Published var email: String = ""
-    @Published var password: String = ""
+    @Published var info: Credentials = Credentials()
     
     func signUp(completion: (() -> Void) = {}) {
-        print(username)
-        print(email)
-        print(password)
+        print(info.username)
+        print(info.email)
+        print(info.password)
         completion()
     }
     
     func signIn() {
         
     }
+}
+
+struct Credentials {
+    var username: String = ""
+    var email: String = ""
+    var password: String = ""
 }
