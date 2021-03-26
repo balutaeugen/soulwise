@@ -9,9 +9,10 @@ import SwiftUI
 
 struct CredentialsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @ObservedObject private var viewModel = CredentialsModel()
     @State private var isPresentingGoals = false
-    @State private var text: String = "Ramon"
-
+    
     private var backButton: some View {
         Button(action: {
             presentationMode.wrappedValue.dismiss()
@@ -19,7 +20,7 @@ struct CredentialsView: View {
             Image("back.icon")
         })
     }
-
+    
     private var credentialsInfo: some View {
         Group {
             Text("Lets get started!")
@@ -37,15 +38,15 @@ struct CredentialsView: View {
         }
         .padding(.horizontal, 30)
     }
-
+    
     private var signUpForm: some View {
         VStack(alignment: .leading, spacing: 20) {
-            ForEach(CredentialType.allCases, id: \.self) { credentialType in
-                CredentialView(type: credentialType)
-            }
+            CredentialView(type: .username, data: $viewModel.username)
+            CredentialView(type: .email, data: $viewModel.email)
+            CredentialView(type: .password, data: $viewModel.password)
         }
     }
-
+    
     private var linksInfo: some View {
         VStack(spacing: 0) {
             Text("By continuing you agree to our")
@@ -70,11 +71,21 @@ struct CredentialsView: View {
             }
         }
     }
-
+    
     private var signUpButton: some View {
-        Button("Sign Up") {
-            isPresentingGoals.toggle()
-        }
+        Button(action: {
+            viewModel.signUp {
+                isPresentingGoals.toggle()
+            }
+        }, label: {
+            HStack(spacing: 13) {
+                Text("Sign Up")
+            }
+            /*
+             Frame is given to HStack to fix clicability issue
+             */
+            .frame(width: 315.resizeWidth, height: 50.resizeHeight)
+        })
         .frame(width: 315.resizeWidth, height: 50.resizeHeight)
         .background(Color(hex: "#FEA516"))
         .font(.system(size: 15, weight: .semibold))
@@ -84,7 +95,7 @@ struct CredentialsView: View {
             GoalsView(showSheetView: $isPresentingGoals)
         }
     }
-
+    
     private var googleButton: some View {
         Button(action: {
             isPresentingGoals.toggle()
@@ -93,9 +104,11 @@ struct CredentialsView: View {
                 Image("google.icon")
                 Text("Continue with Google")
             }
+            /*
+             Frame is given to HStack to fix clicability issue
+             */
+            .frame(width: 315.resizeWidth, height: 50.resizeHeight)
         })
-        .frame(width: 315.resizeWidth, height: 50.resizeHeight)
-
         .font(.system(size: 15, weight: .semibold))
         .foregroundColor(.black)
         .cornerRadius(10)
@@ -105,9 +118,11 @@ struct CredentialsView: View {
             GoalsView(showSheetView: $isPresentingGoals)
         }
     }
-
+    
     var body: some View {
         ZStack {
+            Color.white.edgesIgnoringSafeArea(.all)
+            
             VStack(alignment: .center) {
                 credentialsInfo
                 Spacer()
@@ -137,11 +152,11 @@ struct CredentialsView: View {
     }
 }
 
-// struct CredentialsView_Previews: PreviewProvider {
-//     static var previews: some View {
-//         CredentialsView()
-//     }
-// }
+struct CredentialsView_Previews: PreviewProvider {
+    static var previews: some View {
+        CredentialsView()
+    }
+}
 
 extension View {
     func compatibleFullScreen<Content: View>(isPresented: Binding<Bool>,
@@ -153,7 +168,7 @@ extension View {
 struct FullScreenModifier<V: View>: ViewModifier {
     let isPresented: Binding<Bool>
     let builder: () -> V
-
+    
     @ViewBuilder
     func body(content: Content) -> some View {
         if #available(iOS 14.0, *) {

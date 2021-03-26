@@ -35,7 +35,7 @@ struct LoginView: View {
             Button("Get Started") {
                 isPushingCredentials = true
             }
-            .frame(width: UIScreen.main.bounds.width - (30 * 2), height: 50)
+            .frame(width: 315.resizeWidth, height: 50.resizeHeight)
             .background(Color(hex: "#FEA516"))
             .font(.system(size: 15, weight: .semibold))
             .foregroundColor(.black)

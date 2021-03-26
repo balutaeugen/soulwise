@@ -15,7 +15,7 @@ enum CredentialType: String, CaseIterable {
 
 struct CredentialView: View {
     let type: CredentialType
-    @State private var text: String = ""
+    @Binding var data: String
 
     var body: some View {
         ZStack {
@@ -32,14 +32,18 @@ struct CredentialView: View {
             VStack {
                 Spacer()
                     .frame(height: 17)
-                TextField("", text: $text)
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(.init(hex: "#46515B"))
+                if type == .password {
+                    SecureField("", text: $data)
+                } else {
+                    TextField("", text: $data)
+                }
             }
+            .font(.system(size: 15, weight: .semibold))
+            .foregroundColor(.init(hex: "#46515B"))
         }
         .padding(.vertical, 13)
         .padding(.horizontal, 16)
-        .frame(width: UIScreen.main.bounds.width - (30 * 2), height: 55)
+        .frame(width: 315.resizeWidth, height: 55.resizeHeight)
         .background(Color(hex: "#F6F8F9"))
         .cornerRadius(10)
     }

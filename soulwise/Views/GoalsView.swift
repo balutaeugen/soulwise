@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import Combine
 
 struct GoalsView: View {
     @Binding var showSheetView: Bool
+    @ObservedObject var viewModel = GoalsModel()
+    @State var cancellable: AnyCancellable?
+    @State var elementsSelected: Bool = false
 
     private var goalsInfo: some View {
         Group {
@@ -30,23 +34,30 @@ struct GoalsView: View {
         ZStack {
             VStack(spacing: 32) {
                 HStack(spacing: 15) {
-                    GoalView(image: Image("stress.icon"), title: Text("Stress Relief"))
-                    GoalView(image: Image("curiosity.icon"), title: Text("Curiosity"))
-                    GoalView(image: Image("communicate.icon"), title: Text("Communicate"))
+                    GoalView(goal: .stress, model: viewModel)
+                    GoalView(goal: .curiosity, model: viewModel)
+                    GoalView(goal: .communicate, model: viewModel)
                 }
                 HStack(spacing: 15) {
-                    GoalView(image: Image("sleepy.icon"), title: Text("Sleeping\nSoundly"))
-                    GoalView(image: Image("anxiety.icon"), title: Text("Managing\nAnxiety"))
+                    GoalView(goal: .sleeping, model: viewModel)
+                    GoalView(goal: .anxiety, model: viewModel)
                 }
             }
         }
     }
 
     private var nextButton: some View {
-        Button("Next") {
-
-        }
-        .frame(width: UIScreen.main.bounds.width - (30 * 2), height: 50)
+        Button(action: {
+            
+        }, label: {
+            HStack(spacing: 13) {
+                Text("Next")
+            }
+            /*
+             Frame is given to HStack to fix clicability issue
+             */
+            .frame(width: 315.resizeWidth, height: 50.resizeHeight)
+        })
         .background(Color(hex: "#FEA516"))
         .font(.system(size: 15, weight: .semibold))
         .foregroundColor(.black)
@@ -56,6 +67,8 @@ struct GoalsView: View {
     var body: some View {
         NavigationView {
             ZStack {
+                Color.white.edgesIgnoringSafeArea(.all)
+                
                 VStack(alignment: .center) {
                     Spacer()
                         .frame(height: 45.resizeHeight)
@@ -64,20 +77,34 @@ struct GoalsView: View {
                         .frame(height: 45.resizeHeight)
                     goalsGrid
                     Spacer()
-                        .frame(height: 142.resizeHeight)
-                    nextButton
-                    Spacer()
-                        .frame(height: 27)
+                }
+                
+                VStack {
+                    if elementsSelected {
+                        Spacer()
+                        nextButton
+                        Spacer()
+                            .frame(height: 27)
+                    }
                 }
             }
             .navigationBarHidden(true)
+        }
+        .onAppear {
+            cancellable = viewModel.$goals.sink { goals in
+                elementsSelected = !goals.isEmpty
+            }
         }
     }
 }
 
 struct GoalsView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
-//            .previewDevice("iPhone 8")
+        GoalsView(showSheetView: Binding<Bool>.init(get: {
+            return true
+        }, set: { _ in
+
+        }))
+        // .previewDevice("iPhone 8")
     }
 }
