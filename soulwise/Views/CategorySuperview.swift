@@ -1,5 +1,5 @@
 //
-//  CategoryView.swift
+//  CategorySuperview.swift
 //  soulwise (iOS)
 //
 //  Created by Baluta Eugen on 26.03.2021.
