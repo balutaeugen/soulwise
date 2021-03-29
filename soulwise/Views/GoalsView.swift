@@ -104,11 +104,7 @@ struct GoalsView: View {
 
 struct GoalsView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalsView(showSheetView: Binding<Bool>.init(get: {
-            return true
-        }, set: { _ in
-
-        }))
+        GoalsView(showSheetView: .constant(true))
         // .previewDevice("iPhone 8")
     }
 }

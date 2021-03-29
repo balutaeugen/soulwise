@@ -16,7 +16,7 @@ struct CategoryView: View {
             VStack {
                 Spacer().frame(height: 20)
                 Image("")
-                    .frame(width: 112.resizeWidth, height: 95.resizeHeight)
+                    .frame(width: 112, height: 95)
                 Spacer()
                 Text("Emotional\nIntelligence")
                     .foregroundColor(.init(hex: "#3E4953"))
@@ -25,7 +25,7 @@ struct CategoryView: View {
                 Spacer()
             }
         }
-        .frame(width: 152, height: 180.resizeHeight)
+        .frame(width: 152, height: 180)
     }
 }
 

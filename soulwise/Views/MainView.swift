@@ -76,21 +76,26 @@ struct MainView: View {
     private var header: some View {
         ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
             Color(hex: "#EFF3F5")
+            HStack {
+                Spacer()
+                Image("meditation.illustration")
+            }
+            .padding(.horizontal, 25)
             VStack(alignment: .leading) {
                 Text("Ready to start\nmediation")
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.init(hex: "#3E4953"))
-                Spacer().frame(height: 10.resizeHeight)
+                Spacer().frame(height: 10)
                 Text("Regain your inner\npeace")
                     .font(.system(size: 13, weight: .regular))
                     .foregroundColor(.init(hex: "#B6BEC5"))
-                Spacer().frame(height: 20.resizeHeight)
+                Spacer().frame(height: 20)
                 HStack(spacing: 7) {
                     Button(action: {
                         
                     }, label: {
                         Image("play.icon")
-                            .frame(width: 29.resizeHeight, height: 29.resizeHeight)
+                            .frame(width: 29, height: 29)
                     })
                     Text("5 min")
                         .font(.system(size: 13, weight: .medium))
@@ -100,7 +105,7 @@ struct MainView: View {
             // .padding(.vertical, 25.resizeHeight)
             .padding(.horizontal, 25.resizeWidth)
         }
-        .frame(width: 315.resizeWidth, height: 180.resizeHeight)
+        .frame(width: 315.resizeWidth, height: 180)
         .cornerRadius(20)
     }
     
@@ -142,10 +147,7 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(showSheetView: Binding<Bool>.init(get: {
-            return true
-        }, set: { _ in
-            
-        }))
+        MainView(showSheetView: .constant(true))
+        // .previewDevice("iPhone 8")
     }
 }
